@@ -1,0 +1,274 @@
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+:root {
+    --accent:       #67B2EB;
+    --accent-dark:  #5599cc;
+    --bg-page:      #eef4fb;
+    --bg-card:      #ffffff;
+    --border:       #d0dce8;
+    --text:         #2c3e50;
+    --text-muted:   #6b7f93;
+    --radius:       12px;
+    --shadow:       0 4px 16px rgba(0, 0, 0, 0.08);
+    --gap:          20px;
+    --font:         'Segoe UI', system-ui, sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+body {
+    background-image: url('clouds.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: var(--font);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+}
+
+/* ─── Layout wrapper ────────────────────────────────────────────────────── */
+/* All .container cards stack in a single centered column */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto var(--gap);
+    padding: 24px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+}
+
+h1 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+}
+
+h2 {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* ─── Text input ────────────────────────────────────────────────────────── */
+#textInputArea {
+    width: 100%;
+    height: clamp(120px, 20vh, 220px);
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 0.95rem;
+    color: var(--text);
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+#textInputArea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+#textInput p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+#fileInput {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+/* ─── Options panel ─────────────────────────────────────────────────────── */
+/* Override the inline width:80% that the HTML sets on #options */
+#options {
+    width: 100% !important;
+    gap: 14px;
+}
+
+.option {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.option label {
+    min-width: 160px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.option select,
+.option input[type="number"] {
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: #fff;
+    cursor: pointer;
+    flex: 1;
+    min-width: 120px;
+    max-width: 240px;
+}
+
+.option select:focus,
+.option input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* ─── Color pickers ─────────────────────────────────────────────────────── */
+#gradientColor1,
+#gradientColor2 {
+    width: 40px;
+    height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 2px;
+    flex: none;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────────────── */
+#generateButton,
+#applyGradient {
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font);
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#generateButton {
+    padding: 12px 28px;
+    font-size: 1rem;
+    align-self: center;
+    width: 100%;
+    max-width: 280px;
+}
+
+#applyGradient {
+    padding: 6px 14px;
+    font-size: 0.875rem;
+    flex: none;
+}
+
+#generateButton:hover,
+#applyGradient:hover {
+    background-color: var(--accent-dark);
+}
+
+#generateButton:active,
+#applyGradient:active {
+    transform: scale(0.98);
+}
+
+/* ─── Word cloud container ──────────────────────────────────────────────── */
+#wordCloudContainer {
+    width: 100%;
+    max-width: 900px;
+    min-height: 400px;
+    margin: 0 auto var(--gap);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+/* ─── Word cloud canvas wrapper ─────────────────────────────────────────── */
+#wordCloud {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#wordCloud canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* ─── Tablet  (≤ 768px) ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    body {
+        padding: 16px 12px 36px;
+    }
+
+    .container {
+        padding: 18px;
+    }
+
+    .option label {
+        min-width: 130px;
+    }
+
+    #wordCloudContainer {
+        min-height: 320px;
+    }
+}
+
+/* ─── Mobile  (≤ 480px) ─────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    body {
+        padding: 12px 8px 28px;
+        background-attachment: scroll; /* fixed bg is janky on iOS */
+    }
+
+    .container {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    /* Stack label above controls on narrow screens */
+    .option {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .option label {
+        min-width: unset;
+        margin-bottom: 2px;
+    }
+
+    .option select,
+    .option input[type="number"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #generateButton {
+        max-width: 100%;
+        padding: 14px;
+    }
+
+    #wordCloudContainer {
+        min-height: 240px;
+    }
+}
